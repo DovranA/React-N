@@ -37,6 +37,13 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="[student]"
+            options={{
+              header: ({ route }: any) => <Text>{route.params?.student}</Text>,
+              headerBackTitle: "yza",
+            }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>
@@ -60,9 +67,6 @@ CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY NOT NULL, value TEXT NO
     2
   );
 }
-// if (currentDbVersion === 1) {
-//   Add more migrations
-// }
 
 const styles = StyleSheet.create({
   // Your styles...

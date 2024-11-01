@@ -8,10 +8,13 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { useSQLiteContext } from "expo-sqlite";
 import { useEffect, useState } from "react";
+import { Link, router } from "expo-router";
+import CustomButton from "@/components/CustomButton";
 
 export default function TabTwoScreen() {
   const db = useSQLiteContext();
   const [version, setVersion] = useState("");
+  let [count, setCount] = useState<number>(0);
   useEffect(() => {
     async function setup() {
       const result = await db.getFirstAsync<{ "sqlite_version()": string }>(
@@ -21,6 +24,7 @@ export default function TabTwoScreen() {
     }
     setup();
   }, []);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
@@ -28,7 +32,13 @@ export default function TabTwoScreen() {
         <Ionicons size={310} name="code-slash" style={styles.headerImage} />
       }
     >
-      <Button title="title"></Button>
+      <Button
+        onPress={() => {
+          router.push("/12");
+        }}
+        title={`link`}
+      />
+      <CustomButton />
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">{version}</ThemedText>
       </ThemedView>
